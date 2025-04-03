@@ -1,4 +1,4 @@
-# Practica de Docker y PosgreSQL
+# Práctica de Docker y PosgreSQL
 
 ## 0. Introducción
 
