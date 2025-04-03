@@ -1,30 +1,50 @@
 # Practica de Docker y PosgreSQL
 
+## 0. Introducción
+
+**Docker** es una plataforma que permite crear, desplegar y ejecutar aplicaciones en contenedores. Los contenedores son entornos ligeros y portátiles que permiten ejecutar aplicaciones de manera aislada del sistema operativo subyacente. Esto facilita la implementación y escalabilidad de aplicaciones en diferentes entornos.
+
+**PostgreSQL** es un sistema de gestión de bases de datos relacional y objeto que permite almacenar y gestionar datos de manera eficiente. Es ampliamente utilizado en aplicaciones web y empresariales debido a su robustez y flexibilidad.
+
+**Docker Compose** es una herramienta que permite definir y ejecutar aplicaciones compuestas por múltiples contenedores. Con Docker Compose, se puede definir la configuración de tus contenedores en un archivo YAML y luego iniciar y detener todos los contenedores con un solo comando.
+
+**Docker** y **PostgreSQL** son herramientas muy útiles para el desarrollo y despliegue de aplicaciones. Docker permite crear entornos de desarrollo y producción consistentes, mientras que PostgreSQL proporciona una base de datos robusta y escalable para almacenar datos. Juntas, estas herramientas facilitan la creación y gestión de aplicaciones modernas.
+
+**Python** es un lenguaje de programación de alto nivel que se utiliza ampliamente en el desarrollo web, la ciencia de datos y la inteligencia artificial. Es conocido por su simplicidad y legibilidad, lo que lo convierte en una excelente opción para principiantes y desarrolladores experimentados.
+
+
+## 0.1. Objetivo
+
+En esta práctica, se aprenderá a crear un contenedor de **PostgreSQL** usando **Docker** y **Docker Compose**. También se aprenderá a conectarse a la base de datos desde **Python** usando la librería **psycopg2** y a consultar datos de la base de datos.
+
 
 ## 1. Verificar que Docker y Docker Compose están instalados
-Para verificar que Docker y Docker Compose están instalados, puedes usar los siguientes comandos:
+
+Para verificar que Docker y Docker Compose están instalados, se pueden usar los siguientes comandos:
 
 ```bash
 docker --version
 ```
 
-Si ves un mensaje similar a este, significa que Docker está instalado correctamente:
+Si se muestra un mensaje similar a este, significa que Docker está instalado correctamente:
+
 ```bash
 Docker version 27.5.1-1, build 9f9e4058019a37304dc6572ffcbb409d529b59d8
 ```
-Para verificar que Docker Compose está instalado, puedes usar el siguiente comando:
+Para verificar que Docker Compose está instalado, se puede usar el siguiente comando:
 
 ```bash
 docker-compose --version
 ```
-Si ves un mensaje similar a este, significa que Docker Compose está instalado correctamente:
+Si se muestra un mensaje similar a este, significa que Docker Compose está instalado correctamente:
 
 ```bash
 Docker Compose version v2.34.0
 ```
 
 ## 2. Crear el Dockerfile
-Crea un archivo llamado `Dockerfile` y copia el siguiente contenido:
+
+Crear un archivo llamado `Dockerfile`, este archivo contiene las instrucciones necesarias para crear un contenedor con postgresql, además llama a los archivos **init.sql** que creará la estructura básica de la base de datos, y el archivo **save_data.sql** que contiene datos de prueba. Copiar el siguiente contenido en el archivo:
 
 ```dockerfile
 # Usa la imagen oficial de PostgreSQL
@@ -37,7 +57,8 @@ COPY save_data.sql /docker-entrypoint-initdb.d/
 ```
 
 ## 3. Crear el archivo docker-compose.yml
-Crea un archivo llamado `docker-compose.yml` en tu directorio de trabajo y copia el siguiente contenido:
+
+Crear un archivo llamado `docker-compose.yml` en el directorio de trabajo y copiar el siguiente contenido:
 
 ```yaml
 services:
@@ -56,8 +77,10 @@ volumes:
   postgres_data:
     driver: local
 ```
+
 ## 4. Crear el archivo de inicialización
-Crea un archivo llamado `init.sql` en el mismo directorio y copia el siguiente contenido:
+
+Crear un archivo llamado `init.sql` en el mismo directorio y copiar el siguiente contenido:
 
 ```sql
 -- Crear la tabla para almacenar datos de usuarios
@@ -79,8 +102,9 @@ CREATE TABLE credenciales (
 );
 ```
 
-## 5. Crear el archivo de guardado
-Crea un archivo llamado `save_data.sql` en el mismo directorio y copia el siguiente contenido:
+## 5. Crear el archivo de con datos de prueba
+
+Crear un archivo llamado `save_data.sql` en el mismo directorio y copiar el siguiente contenido:
 
 ```sql
 -- Insertar datos en la tabla usuarios
@@ -97,35 +121,38 @@ VALUES
 
 ## 6. Crear el contendor de PostgreSQL
 
-Primero se crea el contendor de PostgreSQL con el siguiente comando:
+Primero se crea el contendor de **PostgreSQL** con el siguiente comando:
 
 ```bash
 docker-compose up -d
 ```
 
 
-Esto creará el contenedor y lo ejecutará en segundo plano. Puedes verificar que el contenedor se está ejecutando correctamente con el siguiente comando:
+Esto creará el contenedor y lo ejecutará en segundo plano. Se peude verificar que el contenedor se está ejecutando correctamente con el siguiente comando:
 
 ```bash
 docker ps
 ```
-Esto mostrará una lista de los contenedores en ejecución. Deberías ver algo como esto:
+
+Esto mostrará una lista de los contenedores en ejecución. Se debería  ver algo como esto:
 
 ```bash
 CONTAINER ID   IMAGE                      COMMAND                  CREATED        STATUS         PORTS                                       NAMES
 45e3a2e30e00   dbconfiguration-postgres   "docker-entrypoint.s…"   20 hours ago   Up 4 seconds   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   ContDBpractMod3
 ```
+
 Esto indica que el contenedor se está ejecutando correctamente.
 
 
 ## 7. Conectar con el contenedor
 
-Una vez creado el contenedor, puedes conectarte a él usando el siguiente comando:
+Una vez creado el contenedor, se puede conectar a él usando el siguiente comando:
 
 ```bash
 docker exec -it ContDBpractMod3 bash
 ```
-Esto abrirá una terminal dentro del contenedor. Desde aquí, puedes ejecutar comandos de PostgreSQL.
+
+Esto abrirá una terminal dentro del contenedor. Desde aquí, se pueden ejecutar comandos de PostgreSQL.
 
 ```bash
 root@45e3a2e30e00:/# 
@@ -133,13 +160,13 @@ root@45e3a2e30e00:/#
 
 ## 8. Conectar a la base de datos
 
-Para conectarte a la base de datos **credenciales** como el usuario **Admin**, puedes usar el siguiente comando:
+Para conectarte a la base de datos **credenciales** como el usuario **Admin**, se puede usar el siguiente comando:
 
 ```bash
 psql -U Admin -d credenciales
 ```
 
-Esto abrirá una consola de PostgreSQL donde puedes ejecutar comandos SQL.
+Esto abrirá una consola de PostgreSQL donde es posible ejecutar comandos SQL.
 
 ```bash
 root@45e3a2e30e00:/# psql -U Admin -d credenciales
@@ -151,7 +178,7 @@ credenciales=#
 
 ## 9. Consultar la base de datos
 
-Prara consultar la base de datos, puedes usar los siguientes comandos SQL:
+Prara consultar la base de datos, se usan los siguientes comandos SQL:
 
 ```sql
 SELECT * FROM usuarios;
@@ -187,11 +214,12 @@ credenciales=# SELECT * FROM usuarios;
 credenciales=#
 ```
 
-Para consultar la tabla **credenciales**, puedes usar el siguiente comando SQL:
+Para consultar la tabla **credenciales**, se usa el siguiente comando SQL:
 
 ```sql
 SELECT * FROM credenciales;
 ```
+
 Esto mostrará todos los registros de la tabla **credenciales**.
 
 ```sql
@@ -223,13 +251,13 @@ credenciales=# SELECT * FROM credenciales;
 credenciales=#
 ```
 
-Para salir de la consola de PostgreSQL, puedes usar el siguiente comando:
+Para salir de la consola de PostgreSQL, se usa el siguiente comando:
 
 ```sql
 exit
 ```
 
-Para salir de la terminal del contenedor, puedes usar el siguiente comando:
+Para salir de la terminal del contenedor, se usa el siguiente comando:
 
 ```bash
 exit
@@ -240,27 +268,31 @@ exit
 
 Crear un virtualenv, este permitira instalar las liberías **psycopg2** necesarias para conectarse con la base de datos.
 
-Puedes usar el siguiente comando para su creación:
+Se puede usar el siguiente comando para su creación:
 
 ```bash
 python3 -m venv .venv
 ```
 ## 9. Activar el virtualenv
-Para activar el virtualenv, puedes usar el siguiente comando:
+
+Para activar el virtualenv, se usa el siguiente comando:
 
 ```bash
 source .venv/bin/activate
 ```
 ## 10. Instalar las librerías necesarias
-Una vez que el virtualenv está activado, puedes instalar las librerías necesarias. En este caso, la librería necesaria es **psycopg2**, que es un adaptador de PostgreSQL para Python. Esta librería permite interactuar con bases de datos PostgreSQL desde Python.
 
-Para instalar las librerías necesarias, puedes usar el siguiente comando:
+Una vez que el virtualenv está activado, se pueden instalar las librerías necesarias. En este caso, la librería necesaria es **psycopg2**, que es un adaptador de PostgreSQL para Python. Esta librería permite interactuar con bases de datos PostgreSQL desde Python.
+
+Para instalar las librerías necesarias, se usa el siguiente comando:
 
 ```bash
 pip install psycopg2
 ```
+
 ## 11. Crear el archivo de conexión a la base de datos
-Crea un archivo llamado `acceso.py` y copia el siguiente contenido:
+
+Crear un archivo llamado `acceso.py` y copiar el siguiente contenido:
 
 ```python
 """Modulos para conectar con la base de datos y ocultar la contraseña al escribir."""
@@ -340,13 +372,14 @@ if __name__ == "__main__":
     obtener_datos_usuario(username, password)
 ```
 ## 12. Ejecutar el archivo de conexión a la base de datos
-Para ejecutar el archivo de conexión a la base de datos, puedes usar el siguiente comando:
+
+Para ejecutar el archivo de conexión a la base de datos, se usa el siguiente comando:
 
 ```bash
 python3 acceso.py
 ```
 
-Esto ejecutará el script y te pedirá que ingreses tu nombre de usuario y contraseña. Si las credenciales son correctas, mostrará los datos del usuario.
+Esto ejecutará el script y pedirá que ingresar un nombre de usuario y contraseña. Si las credenciales son correctas, mostrará los datos del usuario.
 
 ```bash
 Inicio de sesión en la base de datos
@@ -375,7 +408,7 @@ Si el contenedor de PostgreSQL no está en ejecución, mostrará un mensaje de e
 ```bash
 Inicio de sesión en la base de datos
 Ingrese su usuario: juan.perez1
-Ingrese su contraseña: 
+Ingrese su contraseña:
 Error al conectar con la BD: could not connect to server: Connection refused
         Is the server running on host "localhost" (::1) and accepting
         TCP/IP connections on port 5432?
@@ -388,17 +421,18 @@ Esto indica que el contenedor de PostgreSQL no está en ejecución o que la conf
 
 ## 12. Crear un archivo de requerimientos
 
-Crea un archivo llamado `requirements.txt` y copia el siguiente contenido:
+Crear un archivo llamado `requirements.txt` y copiar el siguiente contenido:
 
 ```bash
 pip freeze > requirements.txt
 ```
+
 Esto permitirá instalar las librerías necesarias en el futuro.
 
 
 ## 13. Instalar las librerías necesarias desde el archivo de requerimientos
 
-Para instalar las librerías necesarias desde el archivo de requerimientos, puedes usar el siguiente comando:
+Para instalar las librerías necesarias desde el archivo de requerimientos, se puede usar el siguiente comando:
 
 ```bash
 pip install -r requirements.txt
@@ -407,13 +441,14 @@ pip install -r requirements.txt
 Esto instalará todas las librerías listadas en el archivo `requirements.txt`.
 
 ## 13. Detener el contenedor
-Para detener el contenedor, puedes usar el siguiente comando:
+
+Para detener el contenedor, se usa el siguiente comando:
 
 ```bash
 docker-compose down
 ```
 
-Esto detendrá y eliminará el contenedor de PostgreSQL. Puedes verificar que el contenedor se ha detenido correctamente con el siguiente comando:
+Esto detendrá y eliminará el contenedor de PostgreSQL. Se puede verificar que el contenedor se ha detenido correctamente con el siguiente comando:
 
 ```bash
 docker ps
@@ -426,7 +461,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 Esto indica que el contenedor se ha detenido correctamente.
 
-##  14. Conclusión
+##  14. Conclusiones
 
 1. En esta práctica, he aprendido a crear un contenedor de PostgreSQL usando Docker y Docker Compose.
 2. También he aprendido a conectarme a la base de datos desde Python usando la librería **psycopg2** y a consultar datos de la base de datos.
@@ -442,5 +477,3 @@ Esto indica que el contenedor se ha detenido correctamente.
 - [Documentación de PostgreSQL](https://www.postgresql.org/docs/)
 - [Documentación de Python](https://docs.python.org/3/)
 - [Documentación de SQL](https://www.w3schools.com/sql/)
-
-
