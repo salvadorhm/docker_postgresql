@@ -1,8 +1,9 @@
+"""Modulos para conectar con la base de datos y ocultar la contraseña al escribir."""
+
 import getpass
 import psycopg2
 
-
-# Configuración de conexión a la base de datos en Docker
+# Configuración de conexión a la base de datos en Docker definidos en docker-compose.yaml
 DB_HOST = "localhost"
 DB_PORT = "5432"
 DB_NAME = "credenciales"
@@ -21,9 +22,8 @@ def conectar_db():
             password=DB_PASSWORD,
         )
         return conn
-    except psycopg2.errors as e:
-        print(e)
-        # print("Error de conexión a la base de datos:", e)
+    except psycopg2.Error as e:
+        print(f"Error al conectar con la BD: {e}")
         return None
 
 
@@ -58,12 +58,13 @@ def obtener_datos_usuario(user_name, user_password):
 
         cursor.close()
         conn.close()
-    except psycopg2.errors as db_error:
-        print("Error al consultar la base de datos:", db_error)
+    except psycopg2.Error as e:
+        print(f"Error al consultar la base de datos: {e}")
 
 
 if __name__ == "__main__":
     print("Inicio de sesión en la base de datos")
+
     # Solicitar credenciales al usuario
     username = input("Ingrese su usuario: ")
     password = getpass.getpass(
