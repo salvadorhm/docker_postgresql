@@ -440,7 +440,36 @@ pip install -r requirements.txt
 
 Esto instalará todas las librerías listadas en el archivo `requirements.txt`.
 
-## 13. Detener el contenedor
+
+## 14. Renombrar la tabla credenciales
+
+La base de datos se llama **credenciales**, y existe una tabla con el mismo nombre. Para evitar confusiones, se renombrará la tabla **credenciales** a **autenticacion**. Para hacer esto, se puede usar el siguiente comando SQL:
+
+```sql
+ALTER TABLE credenciales RENAME TO autenticacion;
+```
+
+Esto renombrará la tabla **credenciales** a **autenticacion**. Para verificar que la tabla se ha renombrado correctamente, se puede usar el siguiente comando SQL:
+
+```sql
+\dt
+```
+
+Esto mostrará una lista de las tablas en la base de datos. Se debería ver algo como esto:
+
+```sql
+credenciales=# \dt
+           List of relations
+ Schema |     Name      | Type  | Owner 
+--------+---------------+-------+-------
+ public | autenticacion | table | Admin
+ public | usuarios      | table | Admin
+(2 rows)
+```
+
+
+
+## . Detener el contenedor
 
 Para detener el contenedor, se usa el siguiente comando:
 
@@ -461,7 +490,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 Esto indica que el contenedor se ha detenido correctamente.
 
-##  14. Conclusiones
+##  . Conclusiones
 
 1. En esta práctica, he aprendido a crear un contenedor de PostgreSQL usando Docker y Docker Compose.
 2. También he aprendido a conectarme a la base de datos desde Python usando la librería **psycopg2** y a consultar datos de la base de datos.
@@ -469,7 +498,7 @@ Esto indica que el contenedor se ha detenido correctamente.
 4. También he aprendido a detener y eliminar el contenedor de PostgreSQL.
 5. Esta práctica es útil para aprender a trabajar con bases de datos en un entorno de desarrollo y producción.
 
-## 15. Recursos adicionales
+## . Recursos adicionales
 
 - [Documentación de Docker](https://docs.docker.com/)
 - [Documentación de Docker Compose](https://docs.docker.com/compose/)

@@ -40,9 +40,9 @@ def obtener_datos_usuario(user_name, user_password):
         # Verificar si el suario y contraseña existen en la tabla credenciales
         query = """
             SELECT u.id_usuario, u.nombre, u.correo, u.telefono, u.fecha_nacimiento
-            FROM credenciales c
-            JOIN usuarios u ON c.id_usuario = u.id_usuario
-            WHERE c.username = %s AND c.password_hash = %s;
+            FROM autenticacion a
+            JOIN usuarios u ON a.id_usuario = u.id_usuario
+            WHERE a.username = %s AND a.password_hash = %s;
         """
         cursor.execute(query, (user_name, user_password))
         usuario = cursor.fetchone()
