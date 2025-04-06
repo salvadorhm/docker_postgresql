@@ -467,9 +467,133 @@ credenciales=# \dt
 (2 rows)
 ```
 
+## 15. Funciones adicionales
+
+Se crea una nueva aplicación llamada app.py con las siguientes funciones:
+
+1. Iniciar sesión en la base de datos.
+2. Salir
+
+```bash
+--- Menú de Inicio ---
+1. Iniciar sesión
+2. Salir
+Seleccione una opción: 
+```
+
+Si el usuario y la contraseña son correctos, se mostrará un nuevo menú . Si no, se mostrará un mensaje de error.
+
+1. Buscar usuario por nombre.
+2. Listar todos los usuarios.
+3. Agregar usuario.
+4. Borrar usuario.
+5. Actualizar datos de usuario.
+6. Cerrar sesión.
+7. Salir.
+
+Tal como se muestra a continuación:
+
+```bash
+--- Menú Principal ---
+1. Buscar usuario por nombre
+2. Listar todos los usuarios
+3. Agregar usuario
+4. Borrar usuario
+5. Actualizar datos de usuario
+6. Cerrar sesión
+7. Salir
+Seleccione una opción:
+```
+
+## 16. Buscar por nombre
+
+Para buscar un usuario por nombre, se usa el siguiente comando:
+
+```bash
+Ingrese el nombre del usuario a buscar: Juan
+
+Usuarios encontrados:
+ID: 1
+Nombre: Juan Pérez
+Correo: juan.perez1@example.com
+Teléfono: 1234567890
+Fecha de Nacimiento: 1985-01-15
+--------------------
+```
+
+## 17. Listar todos los usuarios
+
+Para listar todos los usuarios, se usa el siguiente comando:
+
+```bash
+Seleccione una opción: 2
+
+Lista de todos los usuarios:
+ID: 1
+Nombre: Juan Pérez
+Correo: juan.perez1@example.com
+Teléfono: 1234567890
+Fecha de Nacimiento: 1985-01-15
+--------------------
+ID: 2
+Nombre: Ana Gómez
+Correo: ana.gomez2@example.com
+Teléfono: 1234567891
+Fecha de Nacimiento: 1990-03-22
+--------------------
+```
+
+## 18. Agregar usuario
+
+Para agregar un nuevo usuario, se usa el siguiente comando:
+
+```bash
+Seleccione una opción: 3
+Ingrese el nombre del nuevo usuario: John Carter
+Ingrese el correo electrónico del nuevo usuario: john@email
+Ingrese el teléfono del nuevo usuario: 111111
+Ingrese la fecha de nacimiento del nuevo usuario (YYYY-MM-DD): 2000-01-01
+Ingrese el nombre de usuario para la autenticación: john
+Ingrese la contraseña para la autenticación:
+Usuario 'John Carter' agregado exitosamente con ID: 26.
+```
+
+## 19. Borrar usuario
+Para borrar un usuario, se usa el siguiente comando:
+
+```bash
+Seleccione una opción: 4
+Ingrese el ID del usuario que desea borrar: 20
+Usuario con ID 20 borrado exitosamente.
+```
 
 
-## . Detener el contenedor
+## 20. Actualizar datos de usuario
+
+Para actualizar los datos de un usuario, se usa el siguiente comando:
+
+```bash
+Seleccione una opción: 5
+Ingrese el ID del usuario que desea actualizar: 26
+
+Ingrese los nuevos datos del usuario (deje en blanco para no modificar):
+Nuevo nombre (John Carter): 
+Nuevo correo electrónico: john.carter@email
+Nuevo teléfono: 444444444
+Nueva fecha de nacimiento (YYYY-MM-DD): 2000-01-01
+Datos del usuario con ID 26 actualizados exitosamente.
+```
+
+## 21. Cerrar sesión
+Para cerrar sesión, se usa el siguiente comando:
+
+```bash
+Seleccione una opción: 6
+Sesión cerrada.
+```
+
+
+## 22. Detener el contenedor
 
 Para detener el contenedor, se usa el siguiente comando:
 
@@ -490,7 +614,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 Esto indica que el contenedor se ha detenido correctamente.
 
-##  . Conclusiones
+## 23. Conclusiones
 
 1. En esta práctica, he aprendido a crear un contenedor de PostgreSQL usando Docker y Docker Compose.
 2. También he aprendido a conectarme a la base de datos desde Python usando la librería **psycopg2** y a consultar datos de la base de datos.
@@ -498,7 +622,7 @@ Esto indica que el contenedor se ha detenido correctamente.
 4. También he aprendido a detener y eliminar el contenedor de PostgreSQL.
 5. Esta práctica es útil para aprender a trabajar con bases de datos en un entorno de desarrollo y producción.
 
-## . Recursos adicionales
+## 24. Recursos adicionales
 
 - [Documentación de Docker](https://docs.docker.com/)
 - [Documentación de Docker Compose](https://docs.docker.com/compose/)
